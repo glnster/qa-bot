@@ -40,18 +40,18 @@ def text_splitter(data):
     return chunks
 
 ## Embedding model
-def watsonx_embedding():
+def get_embedding_model():
     embed_params = {
 
     }
-    llm_embedding = LLMEmbedding(model_id='<your-embedding-model-id>',  # e.g., 'text-embedding-3-small'
+    embedding_model = LLMEmbedding(model_id='<your-embedding-model-id>',  # e.g., 'text-embedding-3-small'
                                 model_kwargs=embed_params,
                                 project_id="")
-    return llm_embedding
+    return embedding_model
 
 ## Vector db
 def vector_database(chunks):
-    embedding_model = llm_embedding()
+    embedding_model = get_embedding_model()
     vectordb = Chroma.from_documents(chunks, embedding_model)
     return vectordb
 
